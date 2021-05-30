@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
     def create
         if params[:username]
             begin
-                uri = URI('http://192.168.0.11:3000/login')
+                uri = URI('https://hosp-auth.herokuapp.com/auth/login')
                 res = Net::HTTP.post_form(uri, 'username' => params[:username], 'password' => params[:password])
                 body = JSON.parse(res.body)
                 if body['error'] == 'Invalid username or password'
