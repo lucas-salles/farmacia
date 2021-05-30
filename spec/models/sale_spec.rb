@@ -10,7 +10,7 @@ RSpec.describe Sale, type: :model do
     it "Compra sem nulo" do
       sale = Sale.new
       sale.date_sale = DateTime.current.to_date
-      sale.user_id = 1
+      sale.user = 'Teste'
       expect(sale.valid?).to be_truthy
     end
   end

@@ -29,7 +29,7 @@
       <tr>
         <td><%= format_date(sale.date_sale) %></td>
         <% if current_user_admin? %>
-          <td><%= sale.user_id %></td>
+          <td><%= sale.user %></td>
         <% end %>
         <td><%= sale.saleDetails.length() %></td>
         <td><%= number_to_currency(sale.saleDetails[0].price, :unit => "R$ ", :separator => ",", :delimiter => ".") %></td>
