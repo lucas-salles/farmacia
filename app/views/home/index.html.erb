@@ -1,0 +1,70 @@
+<% if logged_in? %>
+    <div id="home" class="mt-5">
+        <h1>Serviços</h1>
+
+        <div class="cards mt-3">
+            <div class="row">
+                <% if current_user_admin? %>
+                    <div class="col-xl-4 col-md-6 mb-5">
+                        <div class="card">
+                            <%= image_tag("composition.svg", :alt => "Categoria", :class => "card-img-top") %>
+
+                            <div class="card-body">
+                                <h5 class="card-title">Categorias</h5>
+                                
+                                <%= link_to 'Acessar', categories_path, class: 'btn btn-primary mt-5' %>
+                            </div>
+                        </div>      
+                    </div>
+
+                    <div class="col-xl-4 col-md-6 mb-5">
+                        <div class="card">
+                            <%= image_tag("medicine.svg", :alt => "Medicamento", :class => "card-img-top") %>
+
+                            <div class="card-body">
+                                <h5 class="card-title">Medicamentos</h5>
+                                
+                                <%= link_to 'Acessar', medicaments_path, class: 'btn btn-primary mt-5' %>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+
+                <% if !current_user_admin? %>
+                    <div class="col-xl-4 col-md-6 mb-5">
+                        <div class="card">
+                            <%= image_tag("empty_cart.svg", :alt => "Compra", :class => "card-img-top") %>
+
+                            <div class="card-body">
+                                <h5 class="card-title">Compras</h5>
+                                
+                                <%= link_to 'Acessar', sales_path, class: 'btn btn-primary mt-5' %>
+                            </div>
+                        </div>      
+                    </div>
+                <% else %>
+                    <div class="col-xl-4 col-md-6 mb-5">
+                        <div class="card">
+                            <%= image_tag("empty_cart.svg", :alt => "Compra", :class => "card-img-top") %>
+
+                            <div class="card-body">
+                                <h5 class="card-title">Vendas</h5>
+                                
+                                <%= link_to 'Acessar', sales_path, class: 'btn btn-primary mt-5' %>
+                            </div>
+                        </div>      
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+<% else %>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="mt-5">
+                Bem vindo, por favor faça seu <%= link_to 'login', signup_path %> para acessar o sistema.<br />
+                Ainda não possui conta? Acesse nosso <a href="/" target="_blank">Dashboard <span class="icon-external-link"><i class="fas fa-external-link-alt"></i></span></a> para criar uma.
+            </div>
+        </div>
+    </div>
+<% end %>

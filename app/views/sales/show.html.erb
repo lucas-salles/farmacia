@@ -1,0 +1,37 @@
+<% if flash[:notice] %>
+  <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+    <%= flash[:notice] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
+<% if !current_user_admin? %>
+  <h1 class="mt-5">Compra</h1>
+<% else %>
+  <h1 class="mt-5">Venda</h1>
+<% end %>
+
+<p class="mt-3">
+  <strong>Data da compra:</strong>
+  <%= format_date(@sale.date_sale) %>
+</p>
+
+<div>
+  <strong>Medicamentos:</strong>
+  <ul>
+    <% @sale.saleDetails.each do |sale| %>
+      <li>
+        <%= sale.medicament.name %> - <%= number_to_currency(sale.medicament.price) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<p class="mt-3">
+  <strong>Total:</strong>
+  <%= number_to_currency(@sale.saleDetails[0].price, :unit => "R$ ", :separator => ",", :delimiter => ".") %>
+</p>
+
+<div class="mt-5">
+  <%= link_to 'Voltar', sales_path, class: 'btn btn-primary' %>
+</div>

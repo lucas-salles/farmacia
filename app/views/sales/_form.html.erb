@@ -1,0 +1,28 @@
+<%= form_with(model: sale, local: true) do |form| %>
+  <% if sale.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(sale.errors.count, "error") %> prohibited this sale from being saved:</h2>
+
+      <ul>
+      <% sale.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p class="mt-3">
+    <strong>Data da compra:</strong>
+    <%= format_date(DateTime.current.to_date) %>
+  </p>
+
+  <div class="field form-group">
+    <%= form.label :medicaments, 'Medicamentos' %>
+    <%= form.collection_select(:medicaments, @medicaments, :id, :name, {:include_hidden => false, :selected => @medicaments.first.id}, {:multiple => true}) %>
+  </div>
+
+  <div class="actions form-group mt-3">
+    <%= link_to 'Cancelar', sales_path, class: 'btn btn-secondary' %>
+    <%= form.submit 'Salvar', class: 'btn btn-success' %>
+  </div>
+<% end %>

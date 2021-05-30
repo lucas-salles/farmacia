@@ -1,0 +1,40 @@
+<% if flash[:notice] %>
+  <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+    <%= flash[:notice] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
+<h1 class="mt-5">Categorias</h1>
+
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th style="width: 140px;" class="text-center">Operações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.name %></td>
+        <td>
+          <%= link_to category, class: "btn btn-outline-dark btn-sm" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+          <%= link_to edit_category_path(category), class: "btn btn-outline-dark btn-sm" do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
+          <%= link_to category, method: :delete, data: { confirm: 'Tem certeza?' }, class: "btn btn-outline-dark btn-sm" do %>
+            <i class="fas fa-trash"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @categories %>
+<br>
+
+<%= link_to 'Nova Categoria', new_category_path, class: 'btn btn-primary' %>

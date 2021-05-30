@@ -1,0 +1,39 @@
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <div class="navbar-brand">Farmácia</div>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <%= link_to 'Home', root_path, class:"nav-link" %>
+                </div>
+                <% if current_user_admin? %>
+                    <div class="navbar-nav">
+                        <%= link_to 'Categorias', categories_path, class:"nav-link" %>
+                    </div>
+                    <div class="navbar-nav">
+                        <%= link_to 'Medicamentos', medicaments_path, class:"nav-link" %>
+                    </div>
+                <% end %>
+                <div class="navbar-nav">
+                    <% if current_user_admin? %>
+                        <%= link_to 'Vendas', sales_path, class:"nav-link" %>
+                    <% else %>
+                        <%= link_to 'Compras', sales_path, class:"nav-link" %>
+                    <% end %>
+                </div>
+                <% if logged_in? %>
+                    <div class="navbar-nav">
+                        <%= link_to "Sair", logout_path, class: "nav-link",  method: :delete %>
+                    </div>
+                <% else %>
+                    <div class="navbar-nav">
+                        <%= link_to "Entrar", signup_path, class: "nav-link" %>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+    </nav>
+</header>

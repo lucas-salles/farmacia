@@ -1,0 +1,43 @@
+<% if flash[:notice] %>
+  <div class="alert alert-info alert-dismissible fade show mt-3" role="alert">
+    <%= flash[:notice] %>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+<% end %>
+
+<h1 class="mt-5">Medicamentos</h1>
+
+<table class="table table-striped table-sm">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Descrição</th>
+      <th>Preço</th>
+      <th>Categoria</th>
+      <th style="width: 140px;" class="text-center">Operações</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @medicaments.each do |medicament| %>
+      <tr>
+        <td><%= medicament.name %></td>
+        <td><%= medicament.description %></td>
+        <td><%= number_to_currency(medicament.price, :unit => "R$ ", :separator => ",", :delimiter => ".") %></td>
+        <td><%= medicament.category ? medicament.category.name : medicament.category %></td>
+        <td>
+          <%= link_to medicament, class: "btn btn-outline-dark btn-sm" do %>
+            <i class="fas fa-search"></i>
+          <% end %>
+          <%= link_to edit_medicament_path(medicament), class: "btn btn-outline-dark btn-sm" do %>
+            <i class="fas fa-pencil-alt"></i>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @medicaments %>
+<br>
+
+<%= link_to 'Novo Medicamento', new_medicament_path, class: 'btn btn-primary' %>

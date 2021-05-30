@@ -1,0 +1,12 @@
+#home .card {
+  width: 18rem;
+}
+
+#home .card img {
+  padding: 1rem;
+  height: 20rem;
+}
+
+.icon-external-link {
+  font-size: 0.8rem;
+}

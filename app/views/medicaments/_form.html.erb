@@ -1,0 +1,38 @@
+<%= form_with(model: medicament, local: true) do |form| %>
+  <% if medicament.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(medicament.errors.count, "error") %> prohibited this medicament from being saved:</h2>
+
+      <ul>
+      <% medicament.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :name, 'Nome' %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :description, 'Descrição' %>
+    <%= form.text_area :description, :cols => 20, :rows => 8, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :price, 'Preço' %>
+    <%= form.number_field :price, step: :any, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :category_id, 'Categoria' %>
+    <%= collection_select(:medicament, :category_id, @categories, :id, :name) %>
+  </div>
+
+  <div class="actions form-group mt-3">
+    <%= link_to 'Cancelar', medicaments_path, class: 'btn btn-secondary' %>
+    <%= form.submit 'Salvar', class: 'btn btn-success' %>
+  </div>
+<% end %>
