@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
                 if body['error'] == 'Invalid username or password'
                     redirect_to signup_path, notice: "Username ou senha incorretos."
                 else
+                    session[:user_id] = body["user"]["id"]
                     session[:user_username] = body["user"]["username"]
                     session[:user_authority] = body["user"]["authority"]
                     session[:user_name] = body["user"]["name"]
@@ -23,6 +24,7 @@ class SessionsController < ApplicationController
     end
 
     def destroy
+        session[:user_id] = nil
         session[:user_username] = nil
         session[:user_authority] = nil
         session[:user_name] = nil

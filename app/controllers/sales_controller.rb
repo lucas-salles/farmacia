@@ -6,7 +6,7 @@ class SalesController < ApplicationController
     if session[:user_authority] == "ADMIN"
       @sales = Sale.order('id DESC').page params[:page]
     else
-      @sales = Sale.where("user = #{session[:user_name]}").order('id DESC').page params[:page]
+      @sales = Sale.where("user_id = #{session[:user_id]}").order('id DESC').page params[:page]
     end
   end
 
@@ -29,6 +29,7 @@ class SalesController < ApplicationController
   def create
     @sale = Sale.new
 
+    @sale.user_id = session[:user_id]
     @sale.user = session[:user_name]
     @sale.date_sale = DateTime.current.to_date
 

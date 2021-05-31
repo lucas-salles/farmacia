@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     helper_method :logged_in?
 
     def current_user
-        if session[:user_username]
+        if session[:user_id]
           true
         else
           false
